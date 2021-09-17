@@ -23,7 +23,7 @@ func main() {
 
 	// Example 1
 	var num int = 5
-	var powint *int = &num
+	var powint *int = &num // *int is different from *powint
 	fmt.Println(*powint)
 
 	// Example 2
