@@ -10,8 +10,10 @@ import (
  * 2. Asterisk (*) shows the pointer value		=> *s
  *
  * The thing that usually fucks up newbs is the fact that
- * pointer type is written as *int (see Example 1) while tutorials
- * always associate pointers with memory address!!
+ * pointer type is written as *int (see Example 1) while *variablename
+ * shows the pointer's stored value. In this case variablename will
+ * show the memory address.
+ * good source: https://www.youtube.com/watch?v=sTFJtxJXkaY
  *
  * Using := in your code is much better to understand pointers
  * (see Example 2)
