@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func main() {
+func runconc() {
 	out1 := make(chan string)
 	go process("order", out1)
 	for {

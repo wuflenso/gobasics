@@ -31,4 +31,9 @@ func main() {
 	pointa := &text
 	fmt.Println(pointa)  // prints the memory address
 	fmt.Println(*pointa) // prints the pointer value
+
+	// In order for these remote methods to work
+	// Go mod init gobasics -> go install . -> go build . -> ./gobasics
+	runconc()
+	run()
 }
