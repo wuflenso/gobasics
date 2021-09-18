@@ -33,7 +33,7 @@ func main() {
 	fmt.Println(*pointa) // prints the pointer value
 
 	// In order for these remote methods to work
-	// Go mod init gobasics -> go install . -> go build . -> ./gobasics
+	// Go mod init gobasics -> go build . -> ./gobasics
 	runconc()
 	run()
 }
