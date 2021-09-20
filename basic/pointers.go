@@ -32,3 +32,32 @@ func RunPointers() {
 	fmt.Println(pointa)  // prints the memory address
 	fmt.Println(*pointa) // prints the pointer value
 }
+
+/*
+ * BELOW IS A PART TO PROVE WHY TO USE POINTERS IN STRUCT-RELATED FUNCTIONS
+ * OVER NO-POINTER
+ */
+type person struct {
+	name string
+}
+
+// example of modifying struct value without pointer
+func WithoutPointer() {
+	p := person{"Richard"}
+	p = renameNoPointer(p)
+	fmt.Println(p)
+}
+func renameNoPointer(p person) person {
+	p.name = "test"
+	return p
+}
+
+// example of modifying struct value with pointer (less clutter and redundancy)
+func WithPointer() {
+	p := person{"Richard"}
+	renamePointer(&p)
+	fmt.Println(p)
+}
+func renamePointer(p *person) {
+	p.name = "test"
+}
