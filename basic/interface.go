@@ -7,6 +7,7 @@ import (
 /* INTERFACE
  * Keys to understand interfaces:
  * It is a way to define a set of methods that are shared for multiple objects but with a different outcome.
+ * Good source: https://medium.com/rungo/interfaces-in-go-ab1601159b3a
  * See example below
  */
 type Bot interface {
