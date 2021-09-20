@@ -1,39 +1,14 @@
 package main
 
-import (
-	"fmt"
-)
-
-/* POINTERS
- * Keys to understand pointers:
- * 1. Ampersand (&) creates a pointer object	=> &s
- * 2. Asterisk (*) shows the pointer value		=> *s
- *
- * The thing that usually fucks up newbs is the fact that
- * pointer type is written as *int (see Example 1) while *variablename
- * shows the pointer's stored value. In this case variablename will
- * show the memory address.
- * good source: https://www.youtube.com/watch?v=sTFJtxJXkaY
- *
- * Using := in your code is much better to understand pointers
- * (see Example 2)
- */
+import "gobasics/basic"
 
 func main() {
 
-	// Example 1
-	var num int = 5
-	var powint *int = &num // *int is different from *powint
-	fmt.Println(*powint)
+	// In order for these remote methods to work:
+	// 1. Make sure the remote method is public (written in CapitalCase)
+	// 2. Go mod init gobasics -> go main.go
+	basic.RunInterface()
+	basic.RunPointers()
+	basic.RunConc()
 
-	// Example 2
-	var text string = "where u at"
-	pointa := &text
-	fmt.Println(pointa)  // prints the memory address
-	fmt.Println(*pointa) // prints the pointer value
-
-	// In order for these remote methods to work
-	// Go mod init gobasics -> go build . -> ./gobasics
-	runconc()
-	run()
 }

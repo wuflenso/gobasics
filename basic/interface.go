@@ -1,4 +1,4 @@
-package main
+package basic
 
 import (
 	"fmt"
@@ -40,7 +40,7 @@ func (db myChatBot) Reply() {
 }
 
 // This is the caller function
-func run() {
+func RunInterface() {
 	bot1 := new(myDiscordBot)
 	bot2 := new(myChatBot)
 
