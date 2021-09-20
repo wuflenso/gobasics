@@ -13,7 +13,7 @@ import (
  * pointer type is written as *int (see Example 1) while *variablename
  * shows the pointer's stored value. In this case variablename will
  * show the memory address.
- * good source: https://www.youtube.com/watch?v=sTFJtxJXkaY
+ * good source: https://www.youtube.com/watch?v=sTFJtxJXkaY and https://medium.com/@meeusdylan/when-to-use-pointers-in-go-44c15fe04eac
  *
  * Using := in your code is much better to understand pointers
  * (see Example 2)
