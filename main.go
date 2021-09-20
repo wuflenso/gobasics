@@ -1,6 +1,9 @@
 package main
 
-import "gobasics/basic"
+import (
+	"fmt"
+	"gobasics/basic"
+)
 
 func main() {
 
@@ -10,5 +13,6 @@ func main() {
 	basic.RunInterface()
 	basic.RunPointers()
 	basic.RunConc()
+	fmt.Println("just assume this is a followup 1")
 
 }

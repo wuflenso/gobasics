@@ -12,19 +12,26 @@ func RunConc() {
 	out2 := make(chan int)
 	go process("order", out1)
 	go processNumber(out2)
-	//time.Sleep(time.Second * 5)
 
-	var arr []int
+	// Making sure the channels run independently without blocking
+	for {
+		select {
+		case item1, open := <-out1:
+			fmt.Println(item1)
+			if !open {
+				out1 = nil
+			}
+		case item2, open := <-out2:
+			fmt.Println(item2)
+			if !open {
+				out2 = nil
+			}
+		}
 
-	for item := range out2 {
-		fmt.Println(item)
-		arr = append(arr, item)
+		if out1 == nil && out2 == nil {
+			break
+		}
 	}
-	for item := range out1 {
-		fmt.Println(item)
-	}
-	fmt.Println(arr)
-
 }
 
 // IMPORTANT
@@ -41,6 +48,7 @@ func process(item string, out chan string) {
 func processNumber(out chan int) {
 	defer close(out)
 	for i := 0; i < 5; i++ {
+		time.Sleep(time.Second)
 		out <- i
 	}
 }
