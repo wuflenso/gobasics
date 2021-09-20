@@ -18,7 +18,7 @@ func main() {
 	basic.JobWrapper(ch)
 	basic.RunConc()
 
-	// blocking to prevent goroutines asleep - deadlock error
+	// blocking to prevent goroutines asleep - deadlock error with the fastest job
 	for {
 		_, open := <-ch
 		if !open {
