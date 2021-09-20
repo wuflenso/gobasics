@@ -34,13 +34,19 @@ func RunConc() {
 	}
 }
 
+// The public wrapper to test how go routines work when being wrapped to a parent method
+func JobWrapper(ch chan string) {
+	go exampleJob(ch)
+	fmt.Println("lets just leave the it to run by itself while we continue the flow")
+}
+
 // IMPORTANT
 // Methods below are PRIVATE because their names are
 // initiated by a lowercase letter
 func process(item string, out chan string) {
 	defer close(out)
 	for i := 0; i < 5; i++ {
-		time.Sleep(time.Second / 2)
+		time.Sleep(time.Second * 4)
 		out <- item
 	}
 }
@@ -51,4 +57,19 @@ func processNumber(out chan int) {
 		time.Sleep(time.Second)
 		out <- i
 	}
+}
+
+// This simulates execution of a background job
+func exampleJob(ch chan string) {
+	defer close(ch)
+
+	fmt.Println("job 1 done...")
+	time.Sleep(time.Second * 2)
+	fmt.Println("job 2 done...")
+	time.Sleep(time.Second * 2)
+	fmt.Println("job 3 done...")
+	time.Sleep(time.Second * 2)
+	fmt.Println("job 4 done...")
+	time.Sleep(time.Second * 2)
+	fmt.Println("job 5 done...")
 }
