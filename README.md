@@ -1,5 +1,5 @@
 # gobasics
-My private repository to learn mind-fucking go basics like pointers and interfaces
+My personal repository to learn mind-blowing go concepts like pointers, interfaces, and channels.
 
 ## Important Concepts
 On building a local package with "remotely"-callable methods:
