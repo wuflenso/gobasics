@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"gobasics/basic"
+	"gobasics/httpreq"
 )
 
 func main() {
@@ -26,5 +27,5 @@ func main() {
 			break
 		}
 	}
-
+	httpreq.CallHTTP()
 }

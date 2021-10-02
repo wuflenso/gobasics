@@ -1,5 +1,5 @@
 # gobasics
-My personal repository to learn mind-blowing go concepts like pointers, interfaces, and channels.
+My personal repository to learn mind-blowing go concepts like pointers, interfaces, and channels. Now also includes sending http requests.
 
 ## Important Concepts
 On building a local package with "remotely"-callable methods:
