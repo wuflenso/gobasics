@@ -4,46 +4,58 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"gobasics/entity"
 	"io/ioutil"
 	"log"
 	"net/http"
 )
 
-func CallHTTP() {
+// NOTE: THIS SECTION REQUIRES THREEDEE TO RUN
 
-	// I. THE SIMPLE WAY
-	resp, err := http.Get("https://reqres.in/api/users?page=2")
+// I. THE SIMPLE SYNTAX
+func CallHttpGet() {
+
+	// 1. Call the request directly using the REST verb method of http package
+	resp, err := http.Get("http://localhost:3000/print-requests/1")
 	if err != nil {
 		log.Println(errors.New("failed to call endpoint"))
 	}
 
+	// 2. Read the response body. Dont forget to close it afterwards
 	defer resp.Body.Close()
 	body1, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Println(errors.New("failed to read response body"))
 	}
 
-	// Convert Byte to string: https://stackoverflow.com/questions/40632802/how-to-convert-byte-array-to-string-in-go
-	// We can also json.unmarshal the body but we need to state the struct
+	// 3. Show response
+	// a) By Converting Byte to string: https://stackoverflow.com/questions/40632802/how-to-convert-byte-array-to-string-in-go
 	log.Println(string(body1))
 
-	//========================================================================================================================
-	log.Println("===========================================================================================================")
+	// b) We can also json.unmarshal the body but we need to state the struct (NEEDS NESTED STRUCT; See entity.HttpResponse)
+	var receivedObj entity.HttpResponse
+	err = json.Unmarshal(body1, &receivedObj)
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(receivedObj)
+}
 
-	// II. THE MORE IN-DEPTH OPTION
+// II. THE IN-DEPTH SYNTAX
+func CallHttpPost() {
+
 	// 1. Declare http client
 	client := &http.Client{}
 
 	// 2. Convert Request Body string to io.reader format
-	reqBody, err := json.Marshal(map[string]string{
-		"name": "kokondao",
-		"job":  "pecundang",
-	})
+	object := entity.NewPrintRequest("Tablet holder", 150, 20000, 32000, "http://drive.google.com/file/1789", "Karim", "received")
+
+	reqBody, err := json.Marshal(object)
 	if err != nil {
 		log.Println(errors.New("failed to json marshal request body"))
 	}
 
-	req, err := http.NewRequest("POST", "https://reqres.in/api/users", bytes.NewBuffer(reqBody))
+	req, err := http.NewRequest("POST", "http://localhost:3000/print-requests", bytes.NewBuffer(reqBody))
 	if err != nil {
 		log.Println(errors.New("failed to wrap request body"))
 	}

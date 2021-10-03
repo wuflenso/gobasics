@@ -27,5 +27,5 @@ func main() {
 			break
 		}
 	}
-	httpreq.CallHTTP()
+	httpreq.CallHttpGet()
 }
