@@ -13,7 +13,8 @@ import (
 // NOTE: THIS SECTION REQUIRES THREEDEE TO RUN
 
 // I. THE SIMPLE SYNTAX
-func CallHttpGet() {
+func CallHttpGet(out chan string) {
+	defer close(out)
 
 	// 1. Call the request directly using the REST verb method of http package
 	resp, err := http.Get("http://localhost:3000/print-requests/1")
@@ -30,15 +31,15 @@ func CallHttpGet() {
 
 	// 3. Show response
 	// a) By Converting Byte to string: https://stackoverflow.com/questions/40632802/how-to-convert-byte-array-to-string-in-go
-	log.Println(string(body1))
-
 	// b) We can also json.unmarshal the body but we need to state the struct (NEEDS NESTED STRUCT; See entity.HttpResponse)
 	var receivedObj entity.HttpResponse
 	err = json.Unmarshal(body1, &receivedObj)
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(receivedObj)
+	//log.Println(receivedObj)
+
+	out <- string(body1)
 }
 
 // II. THE IN-DEPTH SYNTAX
@@ -78,4 +79,29 @@ func CallHttpPost() {
 	}
 
 	log.Println(string(body2))
+}
+
+func CallHttpGet2(out chan string) {
+	defer close(out)
+
+	client := &http.Client{}
+
+	req, err := http.NewRequest("GET", "https://reqres.in/api/users?page=2", nil)
+	if err != nil {
+		log.Println(errors.New("failed to wrap request body"))
+	}
+	req.Header.Add("Content-Type", `application/json"`)
+
+	res, err := client.Do(req)
+	if err != nil {
+		log.Println(errors.New("failed to read response body"))
+	}
+
+	defer res.Body.Close()
+	body2, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		log.Println(errors.New("failed to read response body"))
+	}
+
+	out <- string(body2)
 }
